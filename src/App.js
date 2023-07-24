@@ -59,11 +59,129 @@ export const Info = ({ handleEdit, children }) => {
   );
 };
 
-const initialPersonal = { name: '', email: '', phone: '' };
+const PersonalInfo = ({ personal, handleChange }) => {
+  const [isEditing, setIsEditing] = useState(true);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(personal);
+    setIsEditing(false);
+  };
+
+  return (
+    <>
+      {isEditing ? (
+        <Form handleSubmit={handleSubmit}>
+          <FormControl>
+            <FormLabel>Name</FormLabel>
+            <Input
+              type="text"
+              name="name"
+              value={personal.name}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              value={personal.email}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Phone</FormLabel>
+            <Input
+              type="tel"
+              name="phone"
+              value={personal.phone}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </Form>
+      ) : (
+        <Info
+          handleEdit={() => {
+            setIsEditing(true);
+          }}
+        >
+          <div>Name: {personal.name}</div>
+          <div>Email: {personal.email}</div>
+          <div>Phone: {personal.phone}</div>
+        </Info>
+      )}
+    </>
+  );
+};
+
+const Education = ({ personal, handleChange }) => {
+  const [isEditing, setIsEditing] = useState(true);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(personal);
+    setIsEditing(false);
+  };
+
+  return (
+    <>
+      {isEditing ? (
+        <Form handleSubmit={handleSubmit}>
+          <FormControl>
+            <FormLabel>Institution</FormLabel>
+            <Input
+              type="text"
+              name="institution"
+              value={personal.institution}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Specialization</FormLabel>
+            <Input
+              type="text"
+              name="spec"
+              value={personal.spec}
+              onChange={handleChange}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Graduation date</FormLabel>
+            <Input
+              type="date"
+              name="gradDate"
+              value={personal.gradDate}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </Form>
+      ) : (
+        <Info
+          handleEdit={() => {
+            setIsEditing(true);
+          }}
+        >
+          <div>Institution: {personal.institution}</div>
+          <div>Specialization: {personal.spec}</div>
+          <div>Graduation date: {personal.gradDate}</div>
+        </Info>
+      )}
+    </>
+  );
+};
+
+const initialPersonal = {
+  name: 'John Doe',
+  email: 'doge1@example.com',
+  phone: '',
+  institution: '',
+  spec: '',
+  gradDate: '',
+};
 
 export const Main = () => {
   const [personal, setPersonal] = useState(initialPersonal);
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -74,75 +192,15 @@ export const Main = () => {
     });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(personal);
-    setIsEditing(false);
-  };
-
   return (
     <Box as="main" p={4}>
-      <Section title="Personal info" mb={6}>
-        {isEditing ? (
-          <Form handleSubmit={handleSubmit}>
-            <FormControl>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type="text"
-                name="name"
-                value={personal.name}
-                onChange={handleChange}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                name="email"
-                value={personal.email}
-                onChange={handleChange}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Phone</FormLabel>
-              <Input
-                type="tel"
-                name="phone"
-                value={personal.phone}
-                onChange={handleChange}
-              />
-            </FormControl>
-          </Form>
-        ) : (
-          <Info
-            handleEdit={() => {
-              setIsEditing(true);
-            }}
-          >
-            <div>Name: {personal.name}</div>
-            <div>Email: {personal.email}</div>
-            <div>Phone: {personal.phone}</div>
-          </Info>
-        )}
+      <Section title="Personal info" mb={4}>
+        <PersonalInfo personal={personal} handleChange={handleChange} />
       </Section>
 
-      <Section title="Section" mb={6}></Section>
-
-      {/* <FormSection title="Education" mb={6}>
-        <FormControl>
-          <FormLabel>Institution</FormLabel>
-          <Input type="text" />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Specialization</FormLabel>
-          <Input type="text" />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Graduation date</FormLabel>
-          <Input type="date" />
-        </FormControl>
-        <Button>Save</Button>
-      </FormSection> */}
+      <Section title="Education" mb={6}>
+        <Education personal={personal} handleChange={handleChange} />
+      </Section>
     </Box>
   );
 };
