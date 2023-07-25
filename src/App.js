@@ -2,6 +2,10 @@ import React from 'react';
 import {
   Box,
   Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Center,
   ChakraProvider,
   FormControl,
   FormLabel,
@@ -25,37 +29,34 @@ export const Header = () => {
 
 export const Section = ({ title, children, ...props }) => {
   return (
-    <Box
-      as="section"
-      p={4}
-      shadow="md"
-      border="1px"
-      borderColor="gray.200"
-      borderRadius={10}
-      {...props}
-    >
+    <Card variant="outline" {...props}>
+      <CardHeader pb={0}>
+        <Heading>{title}</Heading>
+      </CardHeader>
+      <CardBody>{children}</CardBody>
+    </Card>
+  );
+};
+
+export const Form = ({ title, handleSubmit, children }) => {
+  return (
+    <Section title={title} mb={4}>
+      <form onSubmit={handleSubmit}>
+        <VStack mb={4}>{children}</VStack>
+        <Button type="submit">Save</Button>
+      </form>
+    </Section>
+  );
+};
+
+export const Info = ({ title, handleEdit, children }) => {
+  return (
+    <Box p={5}>
       <Heading mb={4}>{title}</Heading>
-      {children}
-    </Box>
-  );
-};
-
-export const Form = ({ handleSubmit, children }) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <VStack>{children}</VStack>
-      <Button type="submit">Save</Button>
-    </form>
-  );
-};
-
-export const Info = ({ handleEdit, children }) => {
-  return (
-    <div>
       {children}
       <br />
       <Button onClick={handleEdit}>Edit</Button>
-    </div>
+    </Box>
   );
 };
 
@@ -69,9 +70,9 @@ const PersonalInfo = ({ personal, handleChange }) => {
   };
 
   return (
-    <>
+    <Box>
       {isEditing ? (
-        <Form handleSubmit={handleSubmit}>
+        <Form title="Personal info" handleSubmit={handleSubmit}>
           <FormControl>
             <FormLabel>Name</FormLabel>
             <Input
@@ -102,6 +103,7 @@ const PersonalInfo = ({ personal, handleChange }) => {
         </Form>
       ) : (
         <Info
+          title="Personal info"
           handleEdit={() => {
             setIsEditing(true);
           }}
@@ -111,7 +113,7 @@ const PersonalInfo = ({ personal, handleChange }) => {
           <div>Phone: {personal.phone}</div>
         </Info>
       )}
-    </>
+    </Box>
   );
 };
 
@@ -125,9 +127,9 @@ const Education = ({ personal, handleChange }) => {
   };
 
   return (
-    <>
+    <Box>
       {isEditing ? (
-        <Form handleSubmit={handleSubmit}>
+        <Form title="Education" handleSubmit={handleSubmit}>
           <FormControl>
             <FormLabel>Institution</FormLabel>
             <Input
@@ -158,6 +160,7 @@ const Education = ({ personal, handleChange }) => {
         </Form>
       ) : (
         <Info
+          title="Education"
           handleEdit={() => {
             setIsEditing(true);
           }}
@@ -167,7 +170,7 @@ const Education = ({ personal, handleChange }) => {
           <div>Graduation date: {personal.gradDate}</div>
         </Info>
       )}
-    </>
+    </Box>
   );
 };
 
@@ -194,13 +197,8 @@ export const Main = () => {
 
   return (
     <Box as="main" p={4}>
-      <Section title="Personal info" mb={4}>
-        <PersonalInfo personal={personal} handleChange={handleChange} />
-      </Section>
-
-      <Section title="Education" mb={6}>
-        <Education personal={personal} handleChange={handleChange} />
-      </Section>
+      <PersonalInfo personal={personal} handleChange={handleChange} />
+      <Education personal={personal} handleChange={handleChange} />
     </Box>
   );
 };
