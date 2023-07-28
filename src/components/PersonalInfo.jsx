@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   HStack,
   Input,
@@ -28,11 +29,14 @@ const Form = ({ title, initialInfo, onSave, stopEditing }) => {
     onSave(info);
   };
 
+  const isNameErr = info.name === '';
+  const isEmailErr = info.email === '';
+
   return (
     <FormWrapper title={title} mb={4}>
       <form onSubmit={handleSubmit}>
         <VStack mb={4}>
-          <FormControl>
+          <FormControl isInvalid={isNameErr} isRequired>
             <FormLabel>Name</FormLabel>
             <Input
               type="text"
@@ -40,8 +44,9 @@ const Form = ({ title, initialInfo, onSave, stopEditing }) => {
               value={info.name}
               onChange={handleChange}
             />
+            {isNameErr && <FormErrorMessage>Name is required</FormErrorMessage>}
           </FormControl>
-          <FormControl>
+          <FormControl isInvalid={isEmailErr} isRequired>
             <FormLabel>Email</FormLabel>
             <Input
               type="email"
@@ -49,6 +54,9 @@ const Form = ({ title, initialInfo, onSave, stopEditing }) => {
               value={info.email}
               onChange={handleChange}
             />
+            {isEmailErr && (
+              <FormErrorMessage>Email is required</FormErrorMessage>
+            )}
           </FormControl>
           <FormControl>
             <FormLabel>Phone</FormLabel>
