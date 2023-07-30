@@ -1,12 +1,12 @@
-import { Box, Button, Heading } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 
-export const InfoWrapper = ({ title, handleEdit, children }) => {
+export const InfoWrapper = ({ title, children, ...props }) => {
   return (
-    <Box p={5}>
-      <Heading mb={4}>{title}</Heading>
+    <Box p={5} {...props}>
+      <Heading mb={4} size="xl">
+        {title}
+      </Heading>
       {children}
-      <br />
-      <Button onClick={handleEdit}>Edit</Button>
     </Box>
   );
 };

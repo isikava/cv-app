@@ -1,20 +1,20 @@
+import { useState } from 'react';
 import {
   Box,
   Button,
+  ButtonGroup,
   FormControl,
   FormLabel,
-  HStack,
   Input,
   VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { FormWrapper } from './common/FormWrapper';
 import { InfoWrapper } from './common/InfoWrapper';
 
 const Form = ({ title, initialInfo, onSave, stopEditing }) => {
   const [info, setInfo] = useState(initialInfo);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setInfo({
@@ -23,7 +23,7 @@ const Form = ({ title, initialInfo, onSave, stopEditing }) => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onSave(info);
   };
@@ -39,6 +39,7 @@ const Form = ({ title, initialInfo, onSave, stopEditing }) => {
               name="institution"
               value={info.institution}
               onChange={handleChange}
+              autoFocus
             />
           </FormControl>
           <FormControl>
@@ -60,10 +61,12 @@ const Form = ({ title, initialInfo, onSave, stopEditing }) => {
             />
           </FormControl>
         </VStack>
-        <HStack>
+        <ButtonGroup colorScheme="blue">
           <Button type="submit">Save</Button>
-          <Button onClick={stopEditing}>Cancel</Button>
-        </HStack>
+          <Button variant="outline" onClick={stopEditing}>
+            Cancel
+          </Button>
+        </ButtonGroup>
       </form>
     </FormWrapper>
   );
@@ -89,15 +92,12 @@ export const Education = ({
           stopEditing={stopEditing}
         ></Form>
       ) : (
-        <InfoWrapper
-          title={title}
-          handleEdit={() => {
-            onEdit(1);
-          }}
-        >
+        <InfoWrapper title={title}>
           <div>Institution: {personal.institution}</div>
           <div>Specialization: {personal.spec}</div>
           <div>Graduation date: {personal.gradDate}</div>
+          <br />
+          <Button onClick={() => onEdit(1)}>Edit</Button>
         </InfoWrapper>
       )}
     </Box>
