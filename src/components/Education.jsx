@@ -93,9 +93,15 @@ export const Education = ({
         ></Form>
       ) : (
         <InfoWrapper title={title}>
-          <div>Institution: {personal.institution}</div>
-          <div>Specialization: {personal.spec}</div>
-          <div>Graduation date: {personal.gradDate}</div>
+          <div>
+            <b>Institution:</b> {personal.institution}
+          </div>
+          <div>
+            <b>Specialization:</b> {personal.spec}
+          </div>
+          <div>
+            <b>Graduation date:</b> {personal.gradDate}
+          </div>
           <br />
           <Button onClick={() => onEdit(1)}>Edit</Button>
         </InfoWrapper>

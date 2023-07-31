@@ -101,9 +101,15 @@ export const PersonalInfo = ({
         />
       ) : (
         <InfoWrapper title={title}>
-          <div>Name: {personal.name}</div>
-          <div>Email: {personal.email}</div>
-          <div>Phone: {personal.phone}</div>
+          <div>
+            <b>Full Name:</b> {personal.name}
+          </div>
+          <div>
+            <b>Email:</b> {personal.email}
+          </div>
+          <div>
+            <b>Phone:</b> {personal.phone}
+          </div>
           <br />
           <Button onClick={() => onEdit(0)}>Edit</Button>
         </InfoWrapper>

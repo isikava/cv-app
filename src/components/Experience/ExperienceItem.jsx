@@ -43,11 +43,15 @@ export const ExperienceItem = ({
       onEdit={() => startEditing(i)}
       onDelete={() => onDelete(i)}
     >
-      <div>Position: {exp.position}</div>
       <div>
-        From: {exp.from} To: {exp.to}
+        <b>Position:</b> {exp.position}
       </div>
-      <div>Description: {exp.description} </div>
+      <div>
+        <b>From:</b> {exp.from} <b>To:</b> {exp.to}
+      </div>
+      <div>
+        <b>Description</b> {exp.description}{' '}
+      </div>
     </ExpWrapper>
   );
 };

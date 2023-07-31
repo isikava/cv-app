@@ -4,8 +4,8 @@ import {
   ButtonGroup,
   FormControl,
   FormLabel,
-  HStack,
   Input,
+  Stack,
   Textarea,
   VStack,
 } from '@chakra-ui/react';
@@ -48,7 +48,7 @@ export const AddEditForm = ({
   return (
     <FormWrapper title={title} mb={4}>
       <form onSubmit={handleSubmit}>
-        <VStack mb={4} align="flex-start">
+        <VStack mb={4} align={['stretch', 'flex-start']}>
           <FormControl>
             <FormLabel>Company</FormLabel>
             <Input
@@ -68,7 +68,7 @@ export const AddEditForm = ({
               onChange={handleChange}
             />
           </FormControl>
-          <HStack>
+          <Stack direction={['column', 'row']}>
             <FormControl>
               <FormLabel>From</FormLabel>
               <Input
@@ -87,7 +87,7 @@ export const AddEditForm = ({
                 onChange={handleChange}
               />
             </FormControl>
-          </HStack>
+          </Stack>
           <FormControl>
             <FormLabel>Description</FormLabel>
             <Textarea

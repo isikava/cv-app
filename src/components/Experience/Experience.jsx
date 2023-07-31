@@ -17,7 +17,7 @@ export const Experience = ({ experience, onAdd, onDelete, onEdit }) => {
   return (
     <Box>
       <InfoWrapper title={title}>
-        <VStack align="flex-start" gap={8} mb={4}>
+        <VStack align="stretch" gap={8} mb={4}>
           {experience.map((exp, i) => (
             <ExperienceItem
               key={i}
