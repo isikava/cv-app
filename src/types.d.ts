@@ -14,3 +14,6 @@ interface IExp {
   to: string;
   description: string;
 }
+
+type OnSaveType = (info: IPersonal) => void;
+type StopEditingType = () => void;
