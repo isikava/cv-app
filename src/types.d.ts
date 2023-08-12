@@ -15,8 +15,7 @@ interface IExp {
   description: string;
 }
 
-type OnSaveType = (info: IPersonal) => void;
-type StopEditingType = () => void;
+type SavePersonalType = (info: IPersonal) => void;
 type AddExperienceType = (newExp: IExp) => void;
 type DeleteExperienceType = (index: number) => void;
 type EditExperienceType = (nextExp: IExp, index: number) => void;

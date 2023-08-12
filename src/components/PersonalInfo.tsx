@@ -15,15 +15,15 @@ import { InfoWrapper } from './common/InfoWrapper';
 type FormProps = {
   title: string;
   initialInfo: IPersonal;
-  onSave: OnSaveType;
-  stopEditing: StopEditingType;
+  onSave: SavePersonalType;
+  stopEditing: () => void;
 };
 
 type PersonalInfoProps = {
   personal: IPersonal;
-  onSave: OnSaveType;
+  onSave: SavePersonalType;
   onEdit: (i: number) => void;
-  stopEditing: StopEditingType;
+  stopEditing: () => void;
   editIdx: number;
 };
 

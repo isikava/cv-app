@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import { Header } from './components/Header';
-// @ts-ignore
 import { Main } from './components/Main';
 // @ts-ignore
 import data from './data';
