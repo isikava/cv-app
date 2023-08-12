@@ -1,7 +1,24 @@
 import { Box, Button, ButtonGroup, Heading } from '@chakra-ui/react';
 import { AddEditForm } from './AddEditForm';
 
-const ExpWrapper = ({ title, onEdit, onDelete, children }) => {
+type ExpWrapperProps = {
+  title: string;
+  onEdit: () => void;
+  onDelete: () => void;
+  children?: React.ReactNode;
+};
+
+type ExperienceItemProps = {
+  exp: IExp;
+  i: number;
+  editIdx: number;
+  startEditing: (i: number) => void;
+  stopEditing: () => void;
+  onEdit: EditExperienceType;
+  onDelete: DeleteExperienceType;
+};
+
+const ExpWrapper = ({ title, onEdit, onDelete, children }: ExpWrapperProps) => {
   return (
     <Box>
       <Heading as="h3" size="lg" mb={3}>
@@ -27,7 +44,7 @@ export const ExperienceItem = ({
   stopEditing,
   onEdit,
   onDelete,
-}) => {
+}: ExperienceItemProps) => {
   const isEditing = editIdx === i;
   return isEditing ? (
     <AddEditForm

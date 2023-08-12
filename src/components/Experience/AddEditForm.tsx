@@ -11,6 +11,15 @@ import {
 } from '@chakra-ui/react';
 import { FormWrapper } from '../common/FormWrapper';
 
+type AddEditFormProps = {
+  title: string;
+  editIdx?: number;
+  initialExp?: IExp | null;
+  onAdd?: AddExperienceType;
+  onEdit?: EditExperienceType;
+  stopEditing?: () => void;
+};
+
 export const AddEditForm = ({
   title,
   editIdx,
@@ -18,7 +27,7 @@ export const AddEditForm = ({
   onAdd,
   onEdit,
   stopEditing,
-}) => {
+}: AddEditFormProps) => {
   const [exp, setExp] = useState(
     initialExp || {
       company: '',
@@ -30,7 +39,9 @@ export const AddEditForm = ({
   );
   const isAddMode = !initialExp;
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     setExp({
@@ -39,13 +50,14 @@ export const AddEditForm = ({
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    isAddMode ? onAdd(exp) : onEdit(exp, editIdx);
-    stopEditing();
+    isAddMode ? onAdd?.(exp) : onEdit?.(exp, editIdx!);
+    stopEditing?.();
   };
 
   return (
+    //@ts-ignore
     <FormWrapper title={title} mb={4}>
       <form onSubmit={handleSubmit}>
         <VStack mb={4} align={['stretch', 'flex-start']}>

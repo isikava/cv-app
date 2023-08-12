@@ -5,10 +5,26 @@ import { InfoWrapper } from '../common/InfoWrapper';
 import { AddEditForm } from './AddEditForm';
 import { ExperienceItem } from './ExperienceItem';
 
-export const Experience = ({ experience, onAdd, onDelete, onEdit }) => {
+type ExperienceProps = {
+  experience: IExp[];
+  onAdd: AddExperienceType;
+  onDelete: DeleteExperienceType;
+  onEdit: EditExperienceType;
+};
+
+export const Experience = ({
+  experience,
+  onAdd,
+  onDelete,
+  onEdit,
+}: ExperienceProps) => {
   const title = 'Experience';
   const [isAdding, setIsAdding] = useState(false);
   const [editIdx, setEditIdx] = useState(-1);
+
+  const startEditing = (i: number) => {
+    setEditIdx(i);
+  };
 
   const stopEditing = () => {
     setEditIdx(-1);
@@ -24,7 +40,7 @@ export const Experience = ({ experience, onAdd, onDelete, onEdit }) => {
               exp={exp}
               i={i}
               editIdx={editIdx}
-              startEditing={setEditIdx}
+              startEditing={startEditing}
               stopEditing={stopEditing}
               onDelete={onDelete}
               onEdit={onEdit}
